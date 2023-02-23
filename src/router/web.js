@@ -1,6 +1,6 @@
-const conversationController = require('../app/controllers/conversationCntroller')
-const messageController = require('../app/controllers/messageController')
-const userController = require('../app/controllers/userController')
+const conversationController = require('../controllers/conversationCntroller')
+const messageController = require('../controllers/messageController')
+const userController = require('../controllers/userController')
 const multer = require('multer');
 const path = require('path');
 
