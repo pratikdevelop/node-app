@@ -3,12 +3,13 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
 var app = express();
+console.log(path.join(__dirname, "../.env"));
 const cors = require("cors");
 const socketio = require("socket.io")(
   8900,
   {
     cors: {
-      origin: "http://localhost:3000",
+      origin: "https://real-chat-pr.netlify.app/",
       credentials: true,
     },
   },
@@ -22,7 +23,7 @@ const user = require("./models/users");
 
 app.use(
   "/api",
-  createProxyMiddleware({ target: "http://localhost:8001", changeOrigin: true })
+  createProxyMiddleware({ target: "https://chat-api-ye6d.onrender.com/", changeOrigin: true })
 );
 express.urlencoded({ extended: false });
 
@@ -62,5 +63,5 @@ socketio.on("connection", (socket) => {
 
 require("./router/web")(app);
 app.listen(8001, () => {
-  console.log(`port listing on "http://localhost:8001`);
+  console.log(`port listing on "https://chat-api-ye6d.onrender.com/`);
 });
