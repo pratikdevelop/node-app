@@ -1,5 +1,5 @@
 require("../models/conn.js")
-const Message = require("../models/message.js")
+const Message = require("../models/Message.js")
 
 const messageController = () => {
     return {
