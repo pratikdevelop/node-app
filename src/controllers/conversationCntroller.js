@@ -13,7 +13,7 @@ const conversationController = () => {
                 const  userId = req.params.id;
                 const search = req.query.search;
                 console.log('serch', search);
-                const conversation = await Conversation.find({members:{$in:userId}}, { $or: { 'first_name': search} });
+                const conversation = await Conversation.find({members:{$in:userId}});
                 res.status(200).json({conversation:conversation});
             }
             catch (error){
