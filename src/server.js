@@ -1,15 +1,17 @@
 const express = require("express");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 const path = require("path");
-require("dotenv").config({ path: path.join(__dirname, "../.env") });
+const  envPath =  path.join(__dirname, "../.env")
+console.log('env', envPath);
+require("dotenv").config({ path: envPath });
 var app = express();
-console.log(path.join(__dirname, "../.env"));
+const portNumber = process.env.PORT || 8000
 const cors = require("cors");
 const socketio = require("socket.io")(
   8900,
   {
     cors: {
-      origin: "https://real-chat-pr.netlify.app/",
+      origin:"http://localhost:8900/",
       credentials: true,
     },
   },
@@ -23,7 +25,7 @@ const user = require("./models/users");
 
 app.use(
   "/api",
-  createProxyMiddleware({ target: "https://chat-api-ye6d.onrender.com/", changeOrigin: true })
+  createProxyMiddleware({ target:"http://localhost:8000/" , changeOrigin: true })
 );
 express.urlencoded({ extended: false });
 
@@ -62,6 +64,6 @@ socketio.on("connection", (socket) => {
 });
 
 require("./router/web")(app);
-app.listen(8001, () => {
-  console.log(`port listing on "https://chat-api-ye6d.onrender.com/`);
+app.listen(portNumber, () => {
+  console.log(`port listing on http://localhost:${portNumber}`);
 });

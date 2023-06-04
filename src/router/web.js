@@ -6,10 +6,20 @@ const path = require('path');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, '../../public/media')
+        console.log(file);
+        if (file.mimetype.includes('image')) {
+            cb(null, path.join(__dirname,'../../public/images'))
+        }
+        else if(file.mimetype.includes('video')) {
+            cb(null, path.join(__dirname,'../../public/video'))
+        }
+        else if(file.mimetype.includes('audio')) {
+        
+        cb(null, path.join(__dirname,'../../public/audio'))
+        }
     },
     filename: function(req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9) + path.extname(file.originalname);
+        const uniqueSuffix = Date.now() + path.extname(file.originalname);
         cb(null, file.fieldname + '-' + uniqueSuffix)
     }
 })

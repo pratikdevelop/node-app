@@ -21,7 +21,8 @@ const transporter = nodemailer.createTransport({
 
 const userController = () => {
   return {
-    index(req, res) {
+    async index(req, res) {
+      console.log(await bcryptjs.hash("Test@1234", 10))
       res.send("home");
     },
     async signup(req, res) {
@@ -36,6 +37,17 @@ const userController = () => {
           confirm_password,
           date_of_birth,
         } = req.body;
+        console.log(req.body);
+        if ( !email || !password || !first_name || !last_name || !phone || !date_of_birth || !username) {
+          return res.status(400).json({msg: "please give all field data"})
+        }
+        const isExistsEmail = await users.findOne({email});
+        if (isExistsEmail) {
+          return res.status(400).json({msg: "email already exixts"}); 
+        }
+        if (password !== confirm_password) {
+          return res.status(400).json({msg: "password and confirm  password does not match"}); 
+        }
         const newUser = new users({
           first_name,
           last_name,
@@ -47,13 +59,14 @@ const userController = () => {
           date_of_birth,
         });
         const data = await newUser.save();
-        return res.status(200).send(" user registeration success");
+        return res.status(200).json({ status: true ,msg:"user registeration successfull"});
       } catch (error) {
         console.log(error);
         return res.status(500).json({ status: "error occured", error: error });
       }
     },
     async getUsers(req, res) {
+      console.log('res',req)
       try {
         const data = await users.find();
         res.status(200).json({ users: data });
@@ -203,9 +216,7 @@ const userController = () => {
             .json({ mesage: "password and confirm password not match" });
           return;
         }
-        // console.log(password);
         const newPassword = await bcryptjs.hash(password, 10);
-        // console.log(newPassword);
 
         const data = await users.findByIdAndUpdate(
           { _id: req.params.id },
