@@ -22,23 +22,18 @@ const transporter = nodemailer.createTransport({
 const userController = () => {
   return {
     async index(req, res) {
-      console.log(await bcryptjs.hash("Test@1234", 10))
       res.send("home");
     },
     async signup(req, res) {
       try {
         const {
-          first_name,
-          last_name,
+         name,
           email,
           password,
           username,
-          phone,
           confirm_password,
-          date_of_birth,
         } = req.body;
-        console.log(req.body);
-        if ( !email || !password || !first_name || !last_name || !phone || !date_of_birth || !username) {
+        if ( !email || !password || !name || !confirm_password  || !username) {
           return res.status(400).json({msg: "please give all field data"})
         }
         const isExistsEmail = await users.findOne({email});
@@ -49,24 +44,19 @@ const userController = () => {
           return res.status(400).json({msg: "password and confirm  password does not match"}); 
         }
         const newUser = new users({
-          first_name,
-          last_name,
+          name,
           email,
           username,
           password,
-          phone,
           confirm_password,
-          date_of_birth,
         });
-        const data = await newUser.save();
-        return res.status(200).json({ status: true ,msg:"user registeration successfull"});
+        const response = await newUser.save();
+        return res.status(200).json({ status: true , message:"signup successfully", response});
       } catch (error) {
-        console.log(error);
-        return res.status(500).json({ status: "error occured", error: error });
+        return res.status(500).json({ status: "error occured", error: JSON.stringify(error) });
       }
     },
     async getUsers(req, res) {
-      console.log('res',req)
       try {
         const data = await users.find();
         res.status(200).json({ users: data });
