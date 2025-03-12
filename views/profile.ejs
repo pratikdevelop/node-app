@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    <title>Profile page</title>
+    <style>
+        * {
+            font-family: "Concert One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="flex relative h-[100vh] w-full bg-gray-800 flex items-center justify-center">
+    <!-- User Profile UI -->
+    <div class="bg-gray-900 rounded-lg p-10 w-96 h-96 flex flex-col items-center justify-center relative">
+        <h1 class="text-3xl text-white font-bold mb-5">User Profile</h1>
+        <div class="flex flex-col items-center justify-center">
+            <!-- Corrected image src with EJS placeholder -->
+            <img src="http://localhost:3000/uploads/<%= user.profile_image %>" alt="user image" class="rounded-full w-20 h-20 object-cover">
+        </div>
+        <div class="flex flex-col items-center justify-center">
+            <!-- Render user details dynamically -->
+            <p class="text-white text-lg font-bold mb-2">Username: <span class="text-gray-400"><%= user.username %> <%= user.profile_image %></span></p>
+            <p class="text-white text-lg font-bold mb-2">Email: <span class="text-gray-400"><%= user.email %></span></p>
+            <p class="text-white text-lg font-bold mb-2">Phone: <span class="text-gray-400"><%= user.phone %></span></p>
+            <p class="text-white text-lg font-bold mb-2">Address: <span class="text-gray-400"><%= user.address %></span></p>
+        </div>
+        <div class="flex  items-center justify-start space-x-4">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit Profile</button>
+            <a  href="/auth/logout" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">logout</a>
+        
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    <title>Signup</title>
+    <style>
+        * {
+            font-family: "Concert One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="flex relative h-screen w-full bg-gray-800 items-center justify-center">
+    <form action="/signup" method="POST" enctype="multipart/form-data" class="flex flex-col bg-gray-200 shadow-2xl border p-4 rounded-lg">
+        <span class="text-2xl text-center my-3 mb-5">Signup your account</span>
+
+        <input class="py-1 w-full px-2 border shadow-md rounded mb-3" placeholder="Enter your name" type="text" id="name" name="name" required>
+
+        <input class="py-1 w-full px-2 border shadow-md rounded mb-3" placeholder="Enter your email" type="email" id="email" name="email" required>
+
+        <input class="py-1 w-full px-2 border shadow-md rounded mb-3" placeholder="Enter your password" type="password" id="password" name="password" required>
+
+        <input class="py-1 w-full px-2 border shadow-md rounded mb-3" placeholder="Enter your phone number" type="tel" id="phone" name="phone" required>
+
+        <textarea class="py-1 w-full px-2 border shadow-md rounded mb-3" placeholder="Enter your address" rows="5" id="address" name="address" required></textarea>
+
+        <input class="py-1 w-full px-2 border shadow-md rounded mb-3" type="file" id="profilePic" name="profilePic" accept="image/*">
+
+        <button type="submit" class="w-full py-2 border bg-slate-800 rounded text-white">Sign Up</button>
+    </form>
+</body>
+</html>

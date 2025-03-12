@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    <title>Signup</title>
+    <style>
+        *{
+            font-family: "Concert One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+        }
+    </style>
+</head>
+<body class="flex relative h-[100vh] w-full bg-gray-800 flex items-center justify-center">
+    <form action="/auth/login" method="POST"   class="flex flex-col w-2/6 bg-gray-200 shadow-2xl border-1 py-8 px-4 space-y-8">
+        <span class="text-2xl text-center my-3 mb-5">login your account</span>
+
+        <input class="
+        py-1 w-full px-2 border-1 shadow-md rounded-full" placeholder="Enter the details" type="email" id="email" name="email" required>
+
+        <input class="
+        py-1 w-full px-2 border-1 shadow-md rounded-full" placeholder="Enter the details" type="password" id="password" name="password" required>
+
+        <a href="/auth/forgot-password" class="
+        
+        text-blue-500 text-sm">Forgot Password?</a>
+
+        <button type="submit" class="w-full py-2 border bg-slate-800 rounded-full text-white">Sign In</button>
+    </form>
+</body>
+</html>
